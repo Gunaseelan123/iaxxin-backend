@@ -1,4 +1,11 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+try {
+  dns.setServers(["8.8.8.8", "8.8.4.4"]);
+} catch (e) {
+  // Ignore if not supported in certain environments
+}
 
 const connectDB = async () => {
   try {
@@ -6,7 +13,9 @@ const connectDB = async () => {
     console.log("MongoDB Connected");
   } catch (error) {
     console.error(" DB Error:", error.message);
-    process.exit(1);
+    if (process.env.NODE_ENV !== "production") {
+      process.exit(1);
+    }
   }
 };
 

@@ -10,11 +10,11 @@ import companyRoutes from "./routes/companyRoutes.js";
 import leadRoutes from "./routes/leadRoutes.js";
 
 
-
+ 
 const app = express();
 
 
-
+  
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
@@ -74,5 +74,13 @@ app.use((err, req, res, next) => {
 
 
 connectDB();
+
+const PORT = process.env.PORT || 5000;
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
 export default app;

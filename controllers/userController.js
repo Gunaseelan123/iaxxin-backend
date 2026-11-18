@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+
 import User from "../models/userModel.js"
 
 
@@ -10,7 +11,7 @@ const generateToken = (userId) =>
 
 export const adminLogin = async (req, res, next) => {
     try {
-        const email = sanitizeInput(req.body.email);
+        const email = sanitizeInput(req.body.email).toLowerCase();
         const password = sanitizeInput(req.body.password);
 
         if (!email) {
